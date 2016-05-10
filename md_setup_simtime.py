@@ -35,9 +35,9 @@ def md_setup_simtime():
     for i in range(5):
         line = file.readline()
         outfile.write(line)
-        line = file.readline()
-        line = simtime_str[:12] + line[12:]
-        outfile.write(line)
+    line = file.readline()
+    line = simtime_str[:12] + line[12:]
+    outfile.write(line)
 
     # copy remainder of file
     while 1:
