@@ -8,6 +8,11 @@ These python scripts are only useful to me and others working with the LBOMD cod
 
 Clone the repository to a directory of your choice, and add this directory to your path.
 
+To make the python scripts executable, run
+
+`chmod +x md_*`
+
+
 ## Usage
 
 The scripts can be called directly and passed options on the command line, or imported into other scripts.
