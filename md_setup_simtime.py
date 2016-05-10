@@ -12,18 +12,13 @@ import os
 import sys
 
 
-def md_setup_simtime():   
+def md_setup_simtime(simtime):
 
     # open lbomd.IN files
     file = open('lbomd.IN', 'r')
     outfile = open('lbomdtemp.IN', 'w')
     #print "Opened file: ", file.name
 
-    if( len(sys.argv) != 2):
-        print("Must pass simtime to the script")
-        exit()
-
-    simtime = sys.argv[1]
     simtime_str = str(simtime) + '             '
 
     # read and edit lines
@@ -55,5 +50,9 @@ def md_setup_simtime():
 
 
 if __name__ == '__main__':
-    md_setup_simtime()
+    if( len(sys.argv) != 2):
+        print("You must pass the simtime to the script")
+        sys.exit()
+    md_setup_simtime(sys.argv[1])
+
     
