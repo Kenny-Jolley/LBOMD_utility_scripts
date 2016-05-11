@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # This function sets options in lbomd.IN so that the md code
-# begins a normal production run.
+# continues an existing simulation.
 
 # set CNTIN in lbomd.IN  (This option continues an existing simulation.)
 # set PRODU in lbomd.IN  (This option tells the md code to do a normal production run.)
