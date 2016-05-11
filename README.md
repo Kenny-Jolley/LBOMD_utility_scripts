@@ -17,8 +17,16 @@ To make the python scripts executable, run
 
 The scripts can be called directly and passed options on the command line, or imported into other scripts.
 
+### md setup
+
+`md_setup_gen_carbon_input_files.py`   
+Generates a set of default input files for carbon systems.
+
 `md_setup_simtime.py  simtime`  
 Sets the maximum simulation time to "simtime".
+
+`md_setup_equilibrate.py`  
+Sets options in the input files so that the md code optimises the system using the conjugate gradient method.
 
 
 TODO
