@@ -28,6 +28,11 @@ Sets the maximum simulation time to "simtime".
 `md_setup_equilibrate.py`  
 Sets options in the input files so that the md code optimises the system using the conjugate gradient method.
 
+`md_setup_production.py`  
+This function sets options in lbomd.IN so that the md code begins a normal production run.
+
+`md_setup_continue_production.py`  
+This function sets options in lbomd.IN so that the md code continues an existing simulation.
 
 TODO
 
