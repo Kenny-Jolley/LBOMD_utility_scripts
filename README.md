@@ -34,5 +34,13 @@ This function sets options in lbomd.IN so that the md code begins a normal produ
 `md_setup_continue_production.py`  
 This function sets options in lbomd.IN so that the md code continues an existing simulation.
 
+`md_setup_damped_md.py`  
+This function sets up the input files so that the md code will run a damped MD simulation.
+
+
 TODO
+
+### lattice generators
+
+
 
