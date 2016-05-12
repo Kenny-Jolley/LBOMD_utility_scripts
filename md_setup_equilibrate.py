@@ -7,6 +7,7 @@
 # set EQUIL in lbomd.IN  (This option tells the md code to equilibrate.)
 # set .T. in equilibrate.IN  (This option tells the md code to do relaxation.)
 # set CONJGD in equilibrate.IN  (This option tells the md code to run a conjugate gradient optimisation.)
+# reset everything else in equilibrate.IN to the default values.
 
 # Kenny Jolley.   May 2016   python 2.7
 
@@ -37,31 +38,19 @@ def md_setup_equilibrate():
     # rename temp to original
     os.rename('lbomdtemp.IN', 'lbomd.IN')
 
-    # open equilibration files
-    file = open('equilibration.IN', 'r')
-    outfile = open('equilibrationtemp.IN', 'w')
-    #print "Opened file: ", file.name
-    line = file.readline()
-    line = ".T." + line[3:]
-    outfile.write(line)
-    line = file.readline()
-    line = "CONJGD" + line[6:]
-    outfile.write(line)
-    # copy remainder of file
-    while 1:
-        line = file.readline()
-        if not line: break
-        outfile.write(line)
-    file.close()
+    # write a new equilibration.IN file with required parameters
+    # remove existing file if present.
+    if (os.path.isfile("equilibration.IN")):
+        os.remove('equilibration.IN')
+    # Generate file
+    outfile = open('equilibration.IN', 'w')
+    outfile.write(".T.       /* RELAXATION .T. => YES ; .F. => NO\n")
+    outfile.write("CONJGD    /* SELECT MINIMIZER (DAMPMD OR CONJGD) \n")
+    outfile.write("0000.0    /* RELAXATION  TIME FOR DAMPED MD\n")
+    outfile.write("0000.0    /* END TIME FOR THERMALISATION OF FULL SYSTEM (EXCET fixed atoms). \n")
+    outfile.write("0000.0    /* END TIME FOR THERMALISATION OF CONSTRAINED SYSTEM (contraints \n")
+    outfile.write("          /* are introduced in lattice.IN). \n")
     outfile.close()
-    # delete original file
-    os.remove('equilibration.IN')
-    # rename temp to original
-    os.rename('equilibrationtemp.IN', 'equilibration.IN')
-
-    #print "set EQUIL in lbomd.IN"
-    #print "set CONJGD to .T. in equilibrate.IN"
-    #print "Done"
 
 if __name__ == '__main__':
     md_setup_equilibrate()
