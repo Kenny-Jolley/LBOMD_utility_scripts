@@ -81,7 +81,7 @@ if (user_choice == 'yes'):
         elif (i < 10000):
             xyz_file_no = str(i)
         else:
-            print 'exceeding 10000 files - exiting'
+            print("exceeding 10000 files - exiting")
             sys.exit()
         xyz_filename_zipped = xyz_file_prefactor + xyz_file_no + '.xyz.gz'
         xyz_filename_extracted = xyz_file_prefactor + xyz_file_no + '.xyz'
