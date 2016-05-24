@@ -3,19 +3,19 @@
 # This function reads the lattice.dat file and creates a larger supercell
 # by stacking multiple copies.
 
-# The user select the number of cells to stack in each direction, either on
+# The user selects the number of cells to stack in each direction, either on
 # the command-line, or interactively.
 
 # Kenny Jolley   May 2016  python 2
 
 import sys
 
-def md_lattice_stack(cells_x,cells_y,cells_z):
+def md_lattice_stack(cellx,celly,cellz):
     # Input file
     file = open('lattice.dat', 'r')
     # Output file
     output_filename = "lattice_supercell_" + str(cells_x) + "_" + str(cells_y) + "_"+ str(cells_z) + ".dat"
-    print output_filename
+    print(output_filename)
     outputfile = open(output_filename, 'w')
 
     # atoms
@@ -70,22 +70,21 @@ def md_lattice_stack(cells_x,cells_y,cells_z):
     file.close()
     outputfile.close()
 
-
 if __name__ == '__main__':
     print("\nThis script reads the lattice.dat file and creates a larger supercell")
     print("by stacking multiple copies.\n")
     if len(sys.argv) == 4:
-        cellx = int(sys.argv[1])
-        celly = int(sys.argv[2])
-        cellz = int(sys.argv[3])
-        print("Cells = " + str(cellx) + " x " + str(celly) + " x " + str(cellz))
+        cells_x = int(sys.argv[1])
+        cells_y = int(sys.argv[2])
+        cells_z = int(sys.argv[3])
+        print("Cells = " + str(cells_x) + " x " + str(cells_y) + " x " + str(cells_z))
     else:
         print("You must set cell no. in x, y and z")
-        cellx = raw_input('Enter no. of cells in x-dir: ')
-        cellx = int(cellx)
-        celly = raw_input('Enter no. of cells in y-dir: ')
-        celly = int(celly)
-        cellz = raw_input('Enter no. of cells in z-dir: ')
-        cellz = int(cellz)
-        print("Cells = " + str(cellx) + " x " + str(celly) + " x " + str(cellz))
-    md_lattice_stack(cellx,celly,cellz)
+        cells_x = raw_input('Enter no. of cells in x-dir: ')
+        cells_x = int(cells_x)
+        cells_y = raw_input('Enter no. of cells in y-dir: ')
+        cells_y = int(cells_y)
+        cells_z = raw_input('Enter no. of cells in z-dir: ')
+        cells_z = int(cells_z)
+        print("Cells = " + str(cells_x) + " x " + str(cells_y) + " x " + str(cells_z))
+    md_lattice_stack(cells_x,cells_y,cells_z)
