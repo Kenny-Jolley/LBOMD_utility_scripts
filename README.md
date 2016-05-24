@@ -19,26 +19,29 @@ The scripts can be called directly and passed options on the command line, or im
 
 ### md setup
 
-`md_setup_gen_carbon_input_files.py`   
-Generates a set of default input files for carbon systems.
-
-`md_setup_simtime.py  simtime`  
-Sets the maximum simulation time to "simtime".
-
-`md_setup_equilibrate.py`  
-Sets options in the input files so that the md code optimises the system using the conjugate gradient method.
-
-`md_setup_production.py`  
-This function sets options in lbomd.IN so that the md code begins a normal production run.
-
 `md_setup_continue_production.py`  
 This function sets options in lbomd.IN so that the md code continues an existing simulation.
 
 `md_setup_damped_md.py`  
 This function sets up the input files so that the md code will run a damped MD simulation.
 
+`md_setup_delete_all_output_files.py`
+This function will delete all files output by the MD code.
 
-TODO
+`md_setup_equilibrate.py`  
+Sets options in the input files so that the md code optimises the system using the conjugate gradient method.
+
+`md_setup_gen_carbon_input_files.py`   
+Generates a set of default input files for carbon systems.
+
+`md_setup_production.py`  
+This function sets options in lbomd.IN so that the md code begins a normal production run.
+
+`md_setup_simtime.py  simtime`  
+Sets the maximum simulation time to "simtime".
+
+`md_setup_thermalise/py  sim_temp  sim_time`
+This function sets options in lbomd.IN and equilibration.IN so that the md code thermalises a system.  User selects the temperature and thermalisation time.
 
 ### lattice generators
 
