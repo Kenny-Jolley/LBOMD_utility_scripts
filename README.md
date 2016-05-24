@@ -25,7 +25,7 @@ This function sets options in lbomd.IN so that the md code continues an existing
 `md_setup_damped_md.py`  
 This function sets up the input files so that the md code will run a damped MD simulation.
 
-`md_setup_delete_all_output_files.py`
+`md_setup_delete_all_output_files.py`  
 This function will delete all files output by the MD code.
 
 `md_setup_equilibrate.py`  
