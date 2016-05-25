@@ -39,24 +39,25 @@ def md_lattice_stack(cellx,celly,cellz):
     print("newbox: " + str(newboxx) + " " + str(newboxy) + " " + str(newboxz) )
     outputfile.write(str(atoms*boxno) + '\t' + '\n')
     outputfile.write(str(newboxx) + ' \t' + str(newboxy) + ' \t' + str(newboxz) + '\n')
-    # read atoms from input
+    # set arrays
     xval = [0 for x in xrange(atoms+1)]
     yval = [0 for x in xrange(atoms+1)]
     zval = [0 for x in xrange(atoms+1)]
     atomtype = [0 for x in xrange(atoms+1)]
     atomcharge = [0 for x in xrange(atoms+1)]
-    counter = 1
-    while 1:
-        dataline = file.readline()
-        if not dataline: break
-    
-        data = dataline.split()
-        atomtype[counter] = data[0]
-        xval[counter] = float(data[1])
-        yval[counter] = float(data[2])
-        zval[counter] = float(data[3])
-        atomcharge[counter] = float(data[4])
-        counter = counter + 1
+    # read atoms from input
+    for i in range(1,atoms+1):
+        line = file.readline()
+        if not line: break
+        
+        data = line.split()
+        atomtype[i] = data[0]
+        xval[i] = float(data[1])
+        yval[i] = float(data[2])
+        zval[i] = float(data[3])
+        atomcharge[i] = float(data[4])
+    file.close()
+
     # print all cells
     for i in range(1,cellx+1):
         for j in range(1,celly+1):
@@ -67,7 +68,6 @@ def md_lattice_stack(cellx,celly,cellz):
                                      str(yval[allatoms]+boxy*(j-1)) + ' \t' +
                                      str(zval[allatoms]+boxz*(k-1)) + ' \t' +
                                      str(atomcharge[allatoms]) + ' \n')
-    file.close()
     outputfile.close()
 
 if __name__ == '__main__':

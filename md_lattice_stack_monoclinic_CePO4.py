@@ -105,9 +105,3 @@ if __name__ == '__main__':
         cells_z = int(cells_z)
         print("Cells = " + str(cells_x) + " x " + str(cells_y) + " x " + str(cells_z))
     md_lattice_stack_monoclinic_CePO4(cells_x,cells_y,cells_z)
-
-
-
-
-
-
