@@ -43,6 +43,13 @@ Sets the maximum simulation time to "simtime".
 `md_setup_thermalise/py  sim_temp  sim_time`
 This function sets options in lbomd.IN and equilibration.IN so that the md code thermalises a system.  User selects the temperature and thermalisation time.
 
+### lattice utility
+
+`md_lattice_stack.py  X Y Z`  
+This function reads the lattice.dat file and creates a larger supercell by stacking multiple copies.  The number of cells in x, y, and z can be specified on the command-line, or entered interactively.  Orthorhombic lattices only.
+
+
+
 ### lattice generators
 
 
