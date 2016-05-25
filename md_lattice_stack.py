@@ -19,15 +19,15 @@ def md_lattice_stack(cellx,celly,cellz):
     outputfile = open(output_filename, 'w')
 
     # atoms
-    l1st = file.readline()
-    line1 = l1st.split()
-    atoms = int(line1[0])
+    line = file.readline()
+    line = line.split()
+    atoms = int(line[0])
     # box
-    l2nd = file.readline()
-    line2 = l2nd.split()
-    boxx = float(line2[0])
-    boxy = float(line2[1])
-    boxz = float(line2[2])
+    line = file.readline()
+    line = line.split()
+    boxx = float(line[0])
+    boxy = float(line[1])
+    boxz = float(line[2])
     newboxx = boxx * cellx
     newboxy = boxy * celly
     newboxz = boxz * cellz
