@@ -101,13 +101,21 @@ def md_setup_gen_random_system(sys_density,atom_id_list,atom_charge_list,atom_nu
             new_x = random.uniform(0, boxsize)
             new_y = random.uniform(0, boxsize)
             new_z = random.uniform(0, boxsize)
-            # check it is not within 1 ang of existing positions.
+            # check it is not within 1 ang of existing positions (accounting for periodic boundaries).
             for j in range(i):
-                if( abs(new_x-atomposx[j])< min_sep):
-                    if( abs(new_y-atomposy[j])< min_sep):
-                        if( abs(new_z-atomposz[j])< min_sep):
-                            print(str(i) + " hit xyz")
-                            hit = 1
+                dx = abs(new_x-atomposx[j])
+                dx = min(dx,abs(dx-boxsize))
+                if( dx< min_sep ):
+                    dy = abs(new_y-atomposy[j])
+                    dy = min(dy,abs(dy-boxsize))
+                    if( dy< min_sep ):
+                        dz = abs(new_z-atomposz[j])
+                        dz = min(dz,abs(dz-boxsize))
+                        if( dz< min_sep ):
+                            r_sq = dx*dx + dy*dy + dz*dz
+                            if ( r_sq < (min_sep*min_sep)):
+                                print(str(i) + " hit xyz")
+                                hit = 1
             if(hit== 0):
                 break
         
