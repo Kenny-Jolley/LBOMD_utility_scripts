@@ -5,8 +5,6 @@
 # use ->  import md_constants
 #  Then access values like this: md_constants.amu  (for amu parameter for example).
 
-import sys
-
 # A library of pysical and mathematical constants
 # kenny Jolley, Jun 2013
 
@@ -56,7 +54,7 @@ foot2inch = 12.0
 
 #    ! Setup atomic array with atom data
 #    ! Atomic symbols
-atomic_symbol = ["HH" for x in xrange(114)]
+atomic_symbol = ["HH" for x in range(114)]
 atomic_symbol[0] = "ZZ"
 atomic_symbol[1] = "H_"
 atomic_symbol[2] = "He"
@@ -172,9 +170,126 @@ atomic_symbol[111] = "Rg"
 atomic_symbol[112] = "Cn"
 atomic_symbol[113] = "FF"  # needed for Fe3+ symbol
 
+#	! Atomic names (British spelling)
+atomic_name = ["HH" for x in range(114)]
+atomic_name[0] = "ZZ"
+atomic_name[1] = "Hydrogen"
+atomic_name[2] = "Helium"
+atomic_name[3] = "Lithium"
+atomic_name[4] = "Beryllium"
+atomic_name[5] = "Boron"
+atomic_name[6] = "Carbon"
+atomic_name[7] = "Nitrogen"
+atomic_name[8] = "Oxygen"
+atomic_name[9] = "Fluorine"
+atomic_name[10] = "Neon"
+atomic_name[11] = "Sodium"
+atomic_name[12] = "Magnesium"
+atomic_name[13] = "Aluminium"
+atomic_name[14] = "Silicon"
+atomic_name[15] = "Phosphorus"
+atomic_name[16] = "Sulphur"
+atomic_name[17] = "Chlorine"
+atomic_name[18] = "Argon"
+atomic_name[19] = "Potassium"
+atomic_name[20] = "Calcium"
+atomic_name[21] = "Scandium"
+atomic_name[22] = "Titanium"
+atomic_name[23] = "Vanadium"
+atomic_name[24] = "Chromium"
+atomic_name[25] = "Manganese"
+atomic_name[26] = "Iron"
+atomic_name[27] = "Cobalt"
+atomic_name[28] = "Nickel"
+atomic_name[29] = "Copper"
+atomic_name[30] = "Zinc"
+atomic_name[31] = "Gallium"
+atomic_name[32] = "Germanium"
+atomic_name[33] = "Arsenic"
+atomic_name[34] = "Selenium"
+atomic_name[35] = "Bromine"
+atomic_name[36] = "Krypton"
+atomic_name[37] = "Rubidium"
+atomic_name[38] = "Strontium"
+atomic_name[39] = "Yttrium"
+atomic_name[40] = "Zirconium"
+atomic_name[41] = "Niobium"
+atomic_name[42] = "Molybdenum"
+atomic_name[43] = "Technetium"
+atomic_name[44] = "Ruthenium"
+atomic_name[45] = "Rhodium"
+atomic_name[46] = "Palladium"
+atomic_name[47] = "Silver"
+atomic_name[48] = "Cadmium"
+atomic_name[49] = "Indium"
+atomic_name[50] = "Tin"
+atomic_name[51] = "Antimony"
+atomic_name[52] = "Tellurium"
+atomic_name[53] = "Iodine"
+atomic_name[54] = "Xenon"
+atomic_name[55] = "Caesium"
+atomic_name[56] = "Barium"
+atomic_name[57] = "Lanthanum"
+atomic_name[58] = "Cerium"
+atomic_name[59] = "Praseodymium"
+atomic_name[60] = "Neodymium"
+atomic_name[61] = "Promethium"
+atomic_name[62] = "Samarium"
+atomic_name[63] = "Europium"
+atomic_name[64] = "Gadolinium"
+atomic_name[65] = "Terbium"
+atomic_name[66] = "Dysprosium"
+atomic_name[67] = "Holmium"
+atomic_name[68] = "Erbium"
+atomic_name[69] = "Thulium"
+atomic_name[70] = "Ytterbium"
+atomic_name[71] = "Lutetium"
+atomic_name[72] = "Hafnium"
+atomic_name[73] = "Tantalum"
+atomic_name[74] = "Tungsten"
+atomic_name[75] = "Rhenium"
+atomic_name[76] = "Osmium"
+atomic_name[77] = "Iridium"
+atomic_name[78] = "Platinum"
+atomic_name[79] = "Gold"
+atomic_name[80] = "Mercury"
+atomic_name[81] = "Thallium"
+atomic_name[82] = "Lead"
+atomic_name[83] = "Bismuth"
+atomic_name[84] = "Polonium"
+atomic_name[85] = "Astatine"
+atomic_name[86] = "Radon"
+atomic_name[87] = "Francium"
+atomic_name[88] = "Radium"
+atomic_name[89] = "Actinium"
+atomic_name[90] = "Thorium"
+atomic_name[91] = "Protactinium"
+atomic_name[92] = "Uranium"
+atomic_name[93] = "Neptunium"
+atomic_name[94] = "Plutonium"
+atomic_name[95] = "Americium"
+atomic_name[96] = "Curium"
+atomic_name[97] = "Berkelium"
+atomic_name[98] = "Californium"
+atomic_name[99] = "Einsteinium"
+atomic_name[100] = "Fermium"
+atomic_name[101] = "Mendelevium"
+atomic_name[102] = "Nobelium"
+atomic_name[103] = "Lawrencium"
+atomic_name[104] = "Rutherfordium"
+atomic_name[105] = "Dubnium"
+atomic_name[106] = "Seaborgium"
+atomic_name[107] = "Bohrium"
+atomic_name[108] = "Hassium"
+atomic_name[109] = "Meitnerium"
+atomic_name[110] = "Darmstadtium"
+atomic_name[111] = "Roentgenium"
+atomic_name[112] = "Copernicium"
+atomic_name[113] = "Iron 3+"      # ! Additional label for Fe3+ ions used in simulations elsewhere
+
 
 #    Atomic masses  in amu
-atomic_mass= [0.0 for x in xrange(114)]
+atomic_mass= [0.0 for x in range(114)]
 #    atomic mass (in AMU) of an element from Wikipedia (http://en.wikipedia.org/wiki/)
 atomic_mass[0]   = 0.000            # ZERO
 atomic_mass[1]   = 1.008            # H_    ! Wiki
@@ -294,9 +409,15 @@ atomic_mass[113] = 55.845           # Fe3+    ! Wiki
 
 def find_atomic_num(atom_name):
     for i in range(114):
-        if(atom_name == atomic_symbol[i]):
+        if(atom_name.lower() == atomic_symbol[i].lower()):
             return i
+                if(atom_name.lower() == atomic_name[i].lower()):
+                    return i
+                if(len(atom_name) == 1):
+                    if( (atom_name[0].lower() == atomic_symbol[i][0].lower()) and (atomic_symbol[i][1] == "_" )  ):
+                        return i
+    
     print("Failed to find atom symbol " + str(atom_name) + " in list")
-    sys.exit()
+        return -1
 
 
