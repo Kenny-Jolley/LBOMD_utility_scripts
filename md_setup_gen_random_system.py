@@ -18,6 +18,18 @@ import md_constants
 # six is a module which patches over many of the python 2/3 common code base pain points.
 from six.moves import input
 
+def print_usage():
+    print("\n> Usage ")
+    print("> ~~~~~ ")
+    print(">  Interactive use: Just run the script with no arguments.")
+    print(">   md_setup_gen_random_system.py ")
+    print(">  Command-line input:")
+    print(">   md_setup_gen_random_system.py density  atom_N_id  atom_N_charge  atom_N_num ")
+
+    print(">  Example :")
+    print(">   md_setup_gen_random_system.py 1.9 C_ 0 1000 ")
+    print(">   md_setup_gen_random_system.py 1.9 C_ 0 1000 O_ 0 100 H_ 0 200")
+
 def is_number(s):
     try:
         float(s)
@@ -94,7 +106,8 @@ def md_setup_gen_random_system(sys_density,atom_id_list,atom_charge_list,atom_nu
     atomposz = [random.uniform(0, boxsize)]
     # create full list of random positions
     for i in range(1,tot_atoms):
-    
+        if( not(i % 1000)):
+            print("Computed: " + str(i) + " positions")
         while 1:
             hit = 0
             # generate next random position
@@ -114,7 +127,7 @@ def md_setup_gen_random_system(sys_density,atom_id_list,atom_charge_list,atom_nu
                         if( dz< min_sep ):
                             r_sq = dx*dx + dy*dy + dz*dz
                             if ( r_sq < (min_sep*min_sep)):
-                                print(str(i) + " hit xyz")
+                                #print(str(i) + " hit xyz")
                                 hit = 1
             if(hit== 0):
                 break
@@ -137,8 +150,10 @@ def md_setup_gen_random_system(sys_density,atom_id_list,atom_charge_list,atom_nu
                        str(atom_charge_list[i]) + "  " +
                        "\n")
             write_counter = write_counter + 1
-    
-    
+    print("\n> Complete!")
+    # close file
+    file.close()
+    print("\n> Closed file: " + file.name)
 
 if __name__ == '__main__':
     print("\n +--------------------------------------+")
@@ -147,20 +162,87 @@ if __name__ == '__main__':
     
     # if command-line options are given, parse the data 
     if len(sys.argv) >1:
+        
+        if(len(sys.argv) < 5):
+            print("> Error, to few arguments given")
+            print_usage()
+            sys.exit()
+        
+        # Declare lists with first element
+        atom_id_list = []
+        atom_charge_list = []
+        atom_num_list = []
+        
+        print("> Processing command-line input")
+        
         # extract density
         sys_density = float(sys.argv[1])
         
         # determine number of atoms required
-        num_sp = int( (len(sys.argv)-2)/2 )
-        print(num_sp)
+        num_sp = int( (len(sys.argv)-2)/3 )
+        print("> Total number of atomic species: " + str(num_sp) )
+        
         
         # loop over all input atoms and check data
-        
-        # atom id
-        atom_id = sys.argv[2]
-        
-        
-        
+        for i in range(num_sp):
+            #print(str(i))
+            
+            # Parse the atom id
+            atom_id = sys.argv[2+i*3]
+            # if given an int, ensure it is a valid id no.
+            if(is_int(atom_id)):
+                atom_id = int(atom_id)
+                if( (atom_id < 1) or (atom_id > 113) ):
+                    print("> Atom id must be between 1 and 113")
+                    print("> Exiting ...")
+                    print_usage()
+                    sys.exit()
+            else:
+                # if given two char atom symbol or element name, find the id no.
+                atom_id = md_constants.find_atomic_num(atom_id)
+                if( (atom_id < 1) or (atom_id > 113) ):
+                    print("> Atom id must be between 1 and 113")
+                    print("> Exiting ...")
+                    print_usage()
+                    sys.exit()
+            # append the found atom id to list
+            atom_id_list.append(atom_id)
+
+            # Parse the atom charge
+            atom_charge = sys.argv[3+i*3]
+            if(is_number(atom_charge)):
+                atom_charge = float(atom_charge)
+            else:
+                print("> Atom charge must be a number.")
+                print("> Exiting ...")
+                print_usage()
+                sys.exit()
+            # append the found atom charge to list
+            atom_charge_list.append(atom_charge)
+
+            # Parse the number of atoms
+            atom_num = sys.argv[4+i*3]
+            # atom num must be a positive integer
+            if(is_int(atom_num)):
+                atom_num = int(atom_num)
+                if( (atom_num < 0) ):
+                    print(" Number of atoms cannot be negative.")
+                    print("> Exiting ...")
+                    print_usage()
+                    sys.exit()
+            else:
+                print("Number of atoms must be a positive integer ")
+                print("> Exiting ...")
+                print_usage()
+                sys.exit()
+            # append the number of atoms to list
+            atom_num_list.append(atom_num)
+
+        print(str(atom_id_list))
+        print(str(atom_charge_list))
+        print(str(atom_num_list))
+
+    # else run interactively
     else:
         print(" You must provide some basic information about the system you wish to generate.\n")
         # Get density from the user
@@ -236,7 +318,8 @@ if __name__ == '__main__':
             if(user_cont.lower() == "n"):
                 break
 
-    # function inputs:  density, array atom ids, array atom charges, array of no. of each atom. 
+    # Build the random system
+    # function inputs:  density, array atom ids, array atom charges, array of no. of each atom.
     md_setup_gen_random_system(sys_density,atom_id_list,atom_charge_list,atom_num_list)
 
 # End
