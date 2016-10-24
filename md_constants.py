@@ -411,13 +411,12 @@ def find_atomic_num(atom_name):
     for i in range(114):
         if(atom_name.lower() == atomic_symbol[i].lower()):
             return i
-                if(atom_name.lower() == atomic_name[i].lower()):
-                    return i
-                if(len(atom_name) == 1):
-                    if( (atom_name[0].lower() == atomic_symbol[i][0].lower()) and (atomic_symbol[i][1] == "_" )  ):
-                        return i
-    
+        if(atom_name.lower() == atomic_name[i].lower()):
+            return i
+        if(len(atom_name) == 1):
+            if( (atom_name[0].lower() == atomic_symbol[i][0].lower()) and (atomic_symbol[i][1] == "_" )  ):
+                return i
     print("Failed to find atom symbol " + str(atom_name) + " in list")
-        return -1
+    return -1
 
 
