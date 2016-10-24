@@ -170,7 +170,7 @@ atomic_symbol[111] = "Rg"
 atomic_symbol[112] = "Cn"
 atomic_symbol[113] = "FF"  # needed for Fe3+ symbol
 
-#	! Atomic names (British spelling)
+#    ! Atomic names (British spelling)
 atomic_name = ["HH" for x in range(114)]
 atomic_name[0] = "ZZ"
 atomic_name[1] = "Hydrogen"
@@ -418,5 +418,4 @@ def find_atomic_num(atom_name):
                 return i
     print("Failed to find atom symbol " + str(atom_name) + " in list")
     return -1
-
 
