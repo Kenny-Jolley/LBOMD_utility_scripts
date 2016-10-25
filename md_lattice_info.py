@@ -7,7 +7,8 @@
 
 import sys, os
 import md_constants
-
+# six is a module which patches over many of the python 2/3 common code base pain points.
+from six.moves import input
 
 def md_lattice_info(lattice_filename):
     # check file exists
@@ -36,7 +37,7 @@ def md_lattice_info(lattice_filename):
     print("Volume:    " + str(volume) + "  Angstroms^3")
 
     # find number of each atom
-    atomnum_list = [0 for x in xrange(114)]
+    atomnum_list = [0 for x in range(114)]
 
     while 1:
         fileline = infile.readline()
@@ -74,7 +75,7 @@ if __name__ == '__main__':
         print("Reading file:  " + filename)
     else:
         print("You must enter a lattice filename to read.")
-        filename = raw_input('Enter filename: ')
+        filename = input('Enter filename: ')
         filename = str(filename)
         print("Reading file:  " + filename)
     md_lattice_info(filename)
