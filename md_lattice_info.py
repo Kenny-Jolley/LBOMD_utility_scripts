@@ -3,7 +3,7 @@
 # This function reads a lattice file and prints some basic
 # information about the lattice
 
-# Kenny Jolley   May 2016  python 2
+# Kenny Jolley   May 2016  python 2/3
 
 import sys, os
 import md_constants

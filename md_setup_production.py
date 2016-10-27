@@ -7,7 +7,7 @@
 # set PRODU in lbomd.IN  (This option tells the md code to do a normal production run.)
 # set NO_THERMOSTAT in lbomd.IN  (This option ensures that no thermostat is applied.)
 
-# Kenny Jolley.   May 2016   python 2.7
+# Kenny Jolley.   May 2016   python 2/3
 
 import os
 

@@ -17,7 +17,9 @@
 
 # user set temperature
 
-# Kenny Jolley.   May 2016.   python 2
+# Kenny Jolley.   May 2016.   python 2/3
+# six is a module which patches over many of the python 2/3 common code base pain points.
+from six.moves import input
 
 import os, sys
 
@@ -75,7 +77,6 @@ def md_setup_thermalise(sim_temp,sim_time):
     line = "0000.0    /* END TIME FOR THERMALISATION OF FULL SYSTEM (EXCET fixed atoms). \n"
     line = simtime_str[:10] + line[10:]
     outfile.write(line)
-    #outfile.write("0000.0    /* END TIME FOR THERMALISATION OF FULL SYSTEM (EXCET fixed atoms). \n")
     outfile.write("0000.0    /* END TIME FOR THERMALISATION OF CONSTRAINED SYSTEM (contraints \n")
     outfile.write("          /* are introduced in lattice.IN). \n")
     outfile.close()
@@ -89,9 +90,9 @@ if __name__ == '__main__':
         print("> 2 values passed on the command-line")
         md_setup_thermalise(sys.argv[1],sys.argv[2])
     else:
-        sim_temp = raw_input("Enter temperature: ")
+        sim_temp = input("Enter temperature: ")
         sim_temp = float(sim_temp)
-        sim_time = raw_input("Enter thermalisation time (fs): ")
+        sim_time = input("Enter thermalisation time (fs): ")
         sim_time = float(sim_time)
         md_setup_thermalise(sim_temp,sim_time)
 

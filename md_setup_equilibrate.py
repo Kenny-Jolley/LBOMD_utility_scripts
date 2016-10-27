@@ -9,7 +9,7 @@
 # set CONJGD in equilibrate.IN  (This option tells the md code to run a conjugate gradient optimisation.)
 # reset everything else in equilibrate.IN to the default values.
 
-# Kenny Jolley.   May 2016   python 2.7
+# Kenny Jolley.   May 2016   python 2/3
 
 import os
 

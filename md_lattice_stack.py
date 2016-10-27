@@ -6,9 +6,12 @@
 # The user selects the number of cells to stack in each direction, either on
 # the command-line, or interactively.
 
-# Kenny Jolley   May 2016  python 2
+# Kenny Jolley   May 2016  python 2/3
 
 import sys
+# six is a module which patches over many of the python 2/3 common code base pain points.
+from six.moves import input
+
 
 def md_lattice_stack(cellx,celly,cellz):
     # Input file
@@ -40,11 +43,11 @@ def md_lattice_stack(cellx,celly,cellz):
     outputfile.write(str(atoms*boxno) + '\t' + '\n')
     outputfile.write(str(newboxx) + ' \t' + str(newboxy) + ' \t' + str(newboxz) + '\n')
     # set arrays
-    xval = [0 for x in xrange(atoms+1)]
-    yval = [0 for x in xrange(atoms+1)]
-    zval = [0 for x in xrange(atoms+1)]
-    atomtype = [0 for x in xrange(atoms+1)]
-    atomcharge = [0 for x in xrange(atoms+1)]
+    xval = [0 for x in range(atoms+1)]
+    yval = [0 for x in range(atoms+1)]
+    zval = [0 for x in range(atoms+1)]
+    atomtype = [0 for x in range(atoms+1)]
+    atomcharge = [0 for x in range(atoms+1)]
     # read atoms from input
     for i in range(1,atoms+1):
         line = file.readline()
@@ -80,11 +83,11 @@ if __name__ == '__main__':
         print("Cells = " + str(cells_x) + " x " + str(cells_y) + " x " + str(cells_z))
     else:
         print("You must set cell no. in x, y and z")
-        cells_x = raw_input('Enter no. of cells in x-dir: ')
+        cells_x = input('Enter no. of cells in x-dir: ')
         cells_x = int(cells_x)
-        cells_y = raw_input('Enter no. of cells in y-dir: ')
+        cells_y = input('Enter no. of cells in y-dir: ')
         cells_y = int(cells_y)
-        cells_z = raw_input('Enter no. of cells in z-dir: ')
+        cells_z = input('Enter no. of cells in z-dir: ')
         cells_z = int(cells_z)
         print("Cells = " + str(cells_x) + " x " + str(cells_y) + " x " + str(cells_z))
     md_lattice_stack(cells_x,cells_y,cells_z)

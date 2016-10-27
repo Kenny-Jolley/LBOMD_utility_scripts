@@ -9,7 +9,7 @@
 # TODO:
 #  command-line input
 
-# Kenny Jolley   Oct 2016  python 3
+# Kenny Jolley   Oct 2016  python 2/3
 
 import sys, os
 import math

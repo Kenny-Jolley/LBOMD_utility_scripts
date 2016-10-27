@@ -6,7 +6,7 @@
 # set PRODU in lbomd.IN  
 # set simtime in lbomd.IN (note max 12 chars)
 
-# Kenny Jolley.   May 2016.   python 2.7.3
+# Kenny Jolley.   May 2016.   python 2/3
 
 import os
 import sys
