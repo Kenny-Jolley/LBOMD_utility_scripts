@@ -8,8 +8,23 @@
 import os, sys
 
 def md_setup_gen_carbon_input_files():
-    print("~~ Generated input files ~~")
-    print(" Note: We do not generate the structure file, lattice.dat, here!!")
+    print("  +---------------------------------------------------------+")
+    print("  | Generate generic input files for a ReaxFF carbon system |")
+    print("  +---------------------------------------------------------+\n")
+    print("~~ Generating input files ~~\n")
+    print(" Generic copies of:")
+    print("   buck.IN")
+    print("   collisions.IN")
+    print("   conjugate_gradient.IN")
+    print("   control")
+    print("   dpmta.IN")
+    print("   equilibration.IN")
+    print("   lattice.IN")
+    print("   lbomd.IN")
+    print("   potfor.IN")
+    print(" ~~ DONE ~~")
+    print(" NOW: Check and edit the input files for your potential / simulation job. \n")
+    print(" Note: The structure file, lattice.dat, is not generated here!!")
     print(" You must also provide LBOMD.exe and ffield\n")
 
     # buck.IN
