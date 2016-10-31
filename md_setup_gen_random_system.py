@@ -5,12 +5,9 @@
 # Lengths and positions are in units of [Angstroms]
 # Density is in units of [g/cm3]
 
-
-# TODO:
-#  command-line input
-
 # Kenny Jolley   Oct 2016  python 2/3
 
+from __future__ import print_function
 import sys, os
 import math
 import random
@@ -317,6 +314,15 @@ if __name__ == '__main__':
             # Break loop if user no longer wants to add anymore atoms
             if(user_cont.lower() == "n"):
                 break
+
+    # Show equivalent command-line string if used interactively
+    if (len(sys.argv) == 1):
+        print("\n> This script can also be passed information on the command line.")
+        print("> To generate another random system with the same properties, use:")
+        print(">  md_setup_gen_random_system.py " + str(sys_density) + " ", end="")
+        for i in range(len(atom_id_list)):
+            print(str(md_constants.atomic_symbol[atom_id_list[i]]) + " " + str(atom_charge_list[i]) + " " + str(atom_num_list[i]) + " ", end="")
+        print("  \n")
 
     # Build the random system
     # function inputs:  density, array atom ids, array atom charges, array of no. of each atom.
