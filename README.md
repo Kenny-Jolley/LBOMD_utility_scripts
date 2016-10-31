@@ -40,7 +40,7 @@ This function sets options in lbomd.IN so that the md code begins a normal produ
 `md_setup_simtime.py  simtime`  
 Sets the maximum simulation time to "simtime".
 
-`md_setup_thermalise/py  sim_temp  sim_time`
+`md_setup_thermalise.py  sim_temp  sim_time`
 This function sets options in lbomd.IN and equilibration.IN so that the md code thermalises a system.  User selects the temperature and thermalisation time.
 
 ### lattice utility
@@ -52,5 +52,6 @@ This function reads the lattice.dat file and creates a larger supercell by stack
 
 ### lattice generators
 
-
+`md_setup_gen_random_system.py  density  atom_symbol atom_charge atom_num`  
+This function builds a lattice with randomly distributed atoms (with atoms no closer than 1 Angstrom).  User input can be specified on the command-line or entered interactively.
 
