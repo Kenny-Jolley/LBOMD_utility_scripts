@@ -2,6 +2,15 @@
 
 # This script quenches multiple lattices with properties read from the command-line.
 
+
+# example inputs
+#  quench a sequence of 2016 atom glass systems
+#    md_run_multi_cgmins.py 2.1 si 1.89 392 b 1.4175 336 O_ -0.945 1288
+#  quench a sequence of 2000 atom carbon systems
+#    md_run_multi_cgmins.py 2.1 C_ 0.0 2000
+
+
+
 # import python modules
 from __future__ import print_function
 import sys
@@ -16,7 +25,7 @@ from md_setup_simtime import md_setup_simtime
 from md_setup_equilibrate import md_setup_equilibrate
 from md_setup_continue_production import md_setup_continue_production
 from md_setup_gen_random_system import md_setup_gen_random_system
-
+from md_setup_production import md_setup_production
 
 def print_usage():
     print("\n> Usage ")
@@ -40,6 +49,45 @@ def is_int(s):
         return True
     except ValueError:
         return False
+
+
+# Check some file requirements, exit if files not available
+if not (os.path.isfile("buck.IN")):
+    print("> Error, a required file is not present")
+    print(">  buck.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("collisions.IN")):
+    print("> Error, a required file is not present")
+    print(">  collisions.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("conjugate_gradient.IN")):
+    print("> Error, a required file is not present")
+    print(">  conjugate_gradient.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("dpmta.IN")):
+    print("> Error, a required file is not present")
+    print(">  dpmta.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("equilibration.IN")):
+    print("> Error, a required file is not present")
+    print(">  equilibration.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("lattice.IN")):
+    print("> Error, a required file is not present")
+    print(">  lattice.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("lbomd.IN")):
+    print("> Error, a required file is not present")
+    print(">  lbomd.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("potfor.IN")):
+    print("> Error, a required file is not present")
+    print(">  potfor.IN  not found ...")
+    sys.exit()
+if not (os.path.isfile("LBOMD.exe")):
+    print("> Error, a required file is not present")
+    print(">  LBOMD.exe  not found ...")
+    sys.exit()
 
 
 # You must pass command-line arguments for the system
@@ -180,6 +228,7 @@ while 1:
         md_setup_gen_random_system(sys_density,atom_id_list,atom_charge_list,atom_num_list)
         
         # set prodution and simtime
+        md_setup_production()
         md_setup_simtime(1200000)
         
         # run md code to quench system
@@ -213,7 +262,7 @@ while 1:
     # set equilibration
     md_setup_equilibrate()
     # run md code to minimize system
-    print("minimizing quench no. "+  str(counter) )
+    print("minimising quench no. "+  str(counter) )
     os.system("./LBOMD.exe >/dev/null")
     # only needed if testing with minimising
     #shutil.copy2('lattice.dat', 'final-lattice.dat')
@@ -229,6 +278,7 @@ while 1:
     # rename final-lattice.dat to lattice.dat
     os.rename('final-lattice.dat', 'lattice.dat')
     # set prodution and simtime
+    md_setup_production()
     md_setup_simtime(1.0)
     # run 1fs to get energy
     os.system("./LBOMD.exe > temp.txt")
