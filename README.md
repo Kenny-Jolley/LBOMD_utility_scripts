@@ -48,17 +48,17 @@ This function sets options in lbomd.IN and equilibration.IN so that the md code 
 
 ### lattice utility
 
+`md_lattice_bulk_strain.py  filename  strain`  
+This function reads a lattice file (filename) and applies a uniform strain in all directions.  The function must be passed the name of the lattice file and the strain (where 1% strain is 1.01 etc).
+
 `md_lattice_info.py  filename`  
 This function reads a lattice file (filename) and prints some basic information about the lattice.
-
-`md_lattice_stack.py  X Y Z`  
-This function reads the lattice.dat file and creates a larger supercell by stacking multiple copies.  The number of cells in x, y, and z can be specified on the command-line, or entered interactively.  Orthorhombic lattices only.
 
 `md_lattice_stack_monoclinic_CePO4.py  X Y Z`  
 This function reads the lattice.dat file and creates a larger supercell by stacking multiple copies.  The number of cells in x, y, and z can be specified on the command-line, or entered interactively.  This is for a monoclinic system, with beta = 104.18 (the optimised value for CePO4)
 
-`md_lattice_bulk_strain.py  filename  strain`  
-This function reads a lattice file (filename) and applies a uniform strain in all directions.  The function must be passed the name of the lattice file and the strain (where 1% strain is 1.01 etc).
+`md_lattice_stack.py  X Y Z`  
+This function reads the lattice.dat file and creates a larger supercell by stacking multiple copies.  The number of cells in x, y, and z can be specified on the command-line, or entered interactively.  Orthorhombic lattices only.
 
 
 ### lattice generators
