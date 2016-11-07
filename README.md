@@ -34,6 +34,9 @@ Sets options in the input files so that the md code optimises the system using t
 `md_setup_gen_carbon_input_files.py`   
 Generates a set of default input files for carbon systems.
 
+`md_setup_gen_input_files.py`   
+Generates a set of default input files.
+
 `md_setup_production.py`  
 This function sets options in lbomd.IN so that the md code begins a normal production run.
 
@@ -44,6 +47,9 @@ Sets the maximum simulation time to "simtime".
 This function sets options in lbomd.IN and equilibration.IN so that the md code thermalises a system.  User selects the temperature and thermalisation time.
 
 ### lattice utility
+
+`md_lattice_info.py  filename`  
+This function reads a lattice file (filename) and prints some basic information about the lattice.
 
 `md_lattice_stack.py  X Y Z`  
 This function reads the lattice.dat file and creates a larger supercell by stacking multiple copies.  The number of cells in x, y, and z can be specified on the command-line, or entered interactively.  Orthorhombic lattices only.
@@ -59,4 +65,16 @@ This function reads a lattice file (filename) and applies a uniform strain in al
 
 `md_setup_gen_random_system.py  density  atom_symbol atom_charge atom_num`  
 This function builds a lattice with randomly distributed atoms (with atoms no closer than 1 Angstrom).  User input can be specified on the command-line or entered interactively.
+
+### md run scripts
+
+`md_run_multi_cgmins.py density  atom_N_id  atom_N_charge  atom_N_num`   
+This script quenches multiple lattices with properties read from the command-line.  MD input files and LBOMD.exe are required.
+Note, the md code should be compiled with the quench flag activated.
+
+
+
+
+
+
 
