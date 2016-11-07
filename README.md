@@ -40,7 +40,7 @@ This function sets options in lbomd.IN so that the md code begins a normal produ
 `md_setup_simtime.py  simtime`  
 Sets the maximum simulation time to "simtime".
 
-`md_setup_thermalise.py  sim_temp  sim_time`
+`md_setup_thermalise.py  sim_temp  sim_time`   
 This function sets options in lbomd.IN and equilibration.IN so that the md code thermalises a system.  User selects the temperature and thermalisation time.
 
 ### lattice utility
@@ -48,6 +48,11 @@ This function sets options in lbomd.IN and equilibration.IN so that the md code 
 `md_lattice_stack.py  X Y Z`  
 This function reads the lattice.dat file and creates a larger supercell by stacking multiple copies.  The number of cells in x, y, and z can be specified on the command-line, or entered interactively.  Orthorhombic lattices only.
 
+`md_lattice_stack_monoclinic_CePO4.py  X Y Z`  
+This function reads the lattice.dat file and creates a larger supercell by stacking multiple copies.  The number of cells in x, y, and z can be specified on the command-line, or entered interactively.  This is for a monoclinic system, with beta = 104.18 (the optimised value for CePO4)
+
+`md_lattice_bulk_strain.py  filename  strain`  
+This function reads a lattice file (filename) and applies a uniform strain in all directions.  The function must be passed the name of the lattice file and the strain (where 1% strain is 1.01 etc).
 
 
 ### lattice generators
