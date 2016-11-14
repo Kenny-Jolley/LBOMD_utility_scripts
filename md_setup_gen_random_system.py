@@ -12,8 +12,6 @@ import sys, os
 import math
 import random
 import md_constants
-# six is a module which patches over many of the python 2/3 common code base pain points.
-from six.moves import input
 
 def print_usage():
     print("\n> Usage ")
@@ -40,6 +38,7 @@ def is_int(s):
         return True
     except ValueError:
         return False
+
 
 def md_setup_gen_random_system(sys_density,atom_id_list,atom_charge_list,atom_num_list):
     print("\n> Generating random system ...\n")
@@ -235,16 +234,26 @@ if __name__ == '__main__':
             # append the number of atoms to list
             atom_num_list.append(atom_num)
 
-        print(str(atom_id_list))
-        print(str(atom_charge_list))
-        print(str(atom_num_list))
+        #print(str(atom_id_list))
+        #print(str(atom_charge_list))
+        #print(str(atom_num_list))
+
+        # Show equivalent command-line string
+        print("> To generate another random system with the same properties, use:")
+        print(">  md_setup_gen_random_system.py " + str(sys_density) + " ", end="")
+        for i in range(len(atom_id_list)):
+            print(str(md_constants.atomic_symbol[atom_id_list[i]]) + " " + str(atom_charge_list[i]) + " " + str(atom_num_list[i]) + " ", end="")
+        print("  \n")
 
     # else run interactively
     else:
         print(" You must provide some basic information about the system you wish to generate.\n")
         # Get density from the user
         while 1:
-            sys_density = input('Enter required system density (g/cm3): ')
+            if sys.version_info[0] < 3:
+                sys_density = raw_input('Enter required system density (g/cm3): ')
+            else:
+                sys_density = input('Enter required system density (g/cm3): ')
             if(is_number(sys_density)):
                 sys_density = float(sys_density)
                 if(sys_density <= 0):
@@ -263,7 +272,10 @@ if __name__ == '__main__':
         while 1:
             # Get atom id
             while 1:
-                atom_id = input('Enter atom name, symbol or proton number: ')
+                if sys.version_info[0] < 3:
+                    atom_id = raw_input('Enter atom name, symbol or proton number: ')
+                else:
+                    atom_id = input('Enter atom name, symbol or proton number: ')
                 # if given an int, ensure it is a valid id no.
                 if(is_int(atom_id)):
                     atom_id = int(atom_id)
@@ -280,7 +292,10 @@ if __name__ == '__main__':
                         break
             # get the charge
             while 1:
-                atom_charge = input("Enter atomic charge for the " + str(md_constants.atomic_name[atom_id]) + " atoms: " )
+                if sys.version_info[0] < 3:
+                    atom_charge = raw_input("Enter atomic charge for the " + str(md_constants.atomic_name[atom_id]) + " atoms: " )
+                else:
+                    atom_charge = input("Enter atomic charge for the " + str(md_constants.atomic_name[atom_id]) + " atoms: " )
                 if(is_number(atom_charge)):
                     atom_charge = float(atom_charge)
                     break
@@ -288,7 +303,10 @@ if __name__ == '__main__':
                     print("You must enter a number")
             # get the number of atoms
             while 1:
-                atom_num = input("Enter the required number of " + str(md_constants.atomic_name[atom_id]) + " atoms: " )
+                if sys.version_info[0] < 3:
+                    atom_num = raw_input("Enter the required number of " + str(md_constants.atomic_name[atom_id]) + " atoms: " )
+                else:
+                    atom_num = input("Enter the required number of " + str(md_constants.atomic_name[atom_id]) + " atoms: " )
                 if(is_int(atom_num)):
                     atom_num = int(atom_num)
                     if( (atom_num < 0) ):
@@ -305,7 +323,10 @@ if __name__ == '__main__':
             
             # Do you wish to add another element?
             while 1:
-                user_cont = input("Do you wish to add another element? (y/n): ")
+                if sys.version_info[0] < 3:
+                    user_cont = raw_input("Do you wish to add another element? (y/n): ")
+                else:
+                    user_cont = input("Do you wish to add another element? (y/n): ")
                 if( (user_cont.lower() == "y") or (user_cont.lower() == "n") ):
                     break
                 else:
