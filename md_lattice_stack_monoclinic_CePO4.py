@@ -16,8 +16,6 @@
 
 import sys
 import math
-# six is a module which patches over many of the python 2/3 common code base pain points.
-from six.moves import input
 
 def md_lattice_stack_monoclinic_CePO4(cellx,celly,cellz):
     # hard-coding the angle beta
@@ -99,11 +97,19 @@ if __name__ == '__main__':
         print("Cells = " + str(cells_x) + " x " + str(cells_y) + " x " + str(cells_z))
     else:
         print("You must set cell no. in x, y and z")
-        cells_x = input('Enter no. of cells in x-dir: ')
-        cells_x = int(cells_x)
-        cells_y = input('Enter no. of cells in y-dir: ')
-        cells_y = int(cells_y)
-        cells_z = input('Enter no. of cells in z-dir: ')
-        cells_z = int(cells_z)
+        if sys.version_info[0] < 3:
+            cells_x = raw_input('Enter no. of cells in x-dir: ')
+            cells_x = int(cells_x)
+            cells_y = raw_input('Enter no. of cells in y-dir: ')
+            cells_y = int(cells_y)
+            cells_z = raw_input('Enter no. of cells in z-dir: ')
+            cells_z = int(cells_z)
+        else:
+            cells_x = input('Enter no. of cells in x-dir: ')
+            cells_x = int(cells_x)
+            cells_y = input('Enter no. of cells in y-dir: ')
+            cells_y = int(cells_y)
+            cells_z = input('Enter no. of cells in z-dir: ')
+            cells_z = int(cells_z)
         print("Cells = " + str(cells_x) + " x " + str(cells_y) + " x " + str(cells_z))
     md_lattice_stack_monoclinic_CePO4(cells_x,cells_y,cells_z)

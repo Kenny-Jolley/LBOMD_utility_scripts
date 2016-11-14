@@ -7,8 +7,6 @@
 
 import sys, os
 import md_constants
-# six is a module which patches over many of the python 2/3 common code base pain points.
-from six.moves import input
 
 def md_lattice_info(lattice_filename):
     # check file exists
@@ -74,10 +72,9 @@ if __name__ == '__main__':
         filename = str(sys.argv[1])
         print("Reading file:  " + filename)
     else:
-        print("You must enter a lattice filename to read.")
-        filename = input('Enter filename: ')
-        filename = str(filename)
-        print("Reading file:  " + filename)
+        print("Usage:")
+        print(" md_lattice_info.py lattice_filename ")
+        sys.exit()
     md_lattice_info(filename)
 
 

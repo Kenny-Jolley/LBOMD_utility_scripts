@@ -7,8 +7,6 @@
 
 import os
 import sys
-# six is a module which patches over many of the python 2/3 common code base pain points.
-from six.moves import input
 
 def md_setup_delete_all_output_files():
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -18,7 +16,10 @@ def md_setup_delete_all_output_files():
     # dir setup
     initial_working_dir = os.getcwd()
     print("> Current directory: " + initial_working_dir +"\n")
-    user_choice = input('Do you wish to do this? (yes/no)?: ')
+    if sys.version_info[0] < 3:
+        user_choice = raw_input('Do you wish to do this? (yes/no)?: ')
+    else:
+        user_choice = input('Do you wish to do this? (yes/no)?: ')
 
     if (user_choice == 'yes'):
         print("> OK deleting all output files")

@@ -18,8 +18,6 @@
 # user set temperature
 
 # Kenny Jolley.   May 2016.   python 2/3
-# six is a module which patches over many of the python 2/3 common code base pain points.
-from six.moves import input
 
 import os, sys
 
@@ -83,17 +81,20 @@ def md_setup_thermalise(sim_temp,sim_time):
 
     print("\n> Thermalisation options set, you can now run the MD code")
 
-
-
 if __name__ == '__main__':
     if( len(sys.argv) == 3):
         print("> 2 values passed on the command-line")
         md_setup_thermalise(sys.argv[1],sys.argv[2])
     else:
-        sim_temp = input("Enter temperature: ")
-        sim_temp = float(sim_temp)
-        sim_time = input("Enter thermalisation time (fs): ")
-        sim_time = float(sim_time)
+        if sys.version_info[0] < 3:
+            sim_temp = raw_input("Enter temperature: ")
+            sim_temp = float(sim_temp)
+            sim_time = raw_input("Enter thermalisation time (fs): ")
+            sim_time = float(sim_time)
+        else:
+            sim_temp = input("Enter temperature: ")
+            sim_temp = float(sim_temp)
+            sim_time = input("Enter thermalisation time (fs): ")
+            sim_time = float(sim_time)
         md_setup_thermalise(sim_temp,sim_time)
-
 
