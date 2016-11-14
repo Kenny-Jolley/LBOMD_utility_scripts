@@ -78,7 +78,7 @@ print(os.getcwd())
 print("Running multi_cgmins simulations")
 density = sim/1000.0
 passed_vars_string = ( str(density) + " " + str(sys_struct_string) +  " > command_line_out.txt" )
-md_run_string = './md_run_multi_cgmins.py ' + passed_vars_string
+md_run_string = 'md_run_multi_cgmins.py ' + passed_vars_string
 print(md_run_string)
 sys.stdout.flush()
 os.system(md_run_string)  # should not return unless multimin script fails
