@@ -5,6 +5,18 @@
 
 # each run is contained within its own directory
 
+# Usage:
+#  md_run_multi_cascades.py specie_to_hit cascade_energy cascade_time
+#  or call the function:  md_run_multi_cascades(specie_to_hit, cascade_energy, cascade_time)
+#   where, specie_to_hit can be an atom name, symbol or atomic number.
+#   cascade_energy, cascade_time,  must be positive numbers.
+#
+#  md_run_multi_cascades.py C_ 1000 4000
+#  md_run_multi_cascades.py carbon 1000 4000
+#  md_run_multi_cascades.py c 1000 4000
+
+# Kenny Jolley   Nov 2016  python 2/3
+
 # import python modules
 import sys
 import os
@@ -59,58 +71,60 @@ def md_setup_collision(specie_to_hit, col_energy,xpos,ypos,zpos,xdir,ydir,zdir,x
     outfile.write(line)
     outfile.close()
 
-# read lattice header at input filename
-def read_lattice_header(input_lattice_path):
-    file = open(input_lattice_path, 'r')
-    latline = file.readline()
-    line = latline.split()
-    atoms = int(line[0])
-    latline = file.readline()
-    line = latline.split()
-    box_x = float(line[0])
-    box_y = float(line[1])
-    box_z = float(line[2])
-    file.close()
-    return atoms,box_x,box_y,box_z
-
-# read lattice data into arrays
-def read_lattice_data(input_lattice_path):
-    pos_x = [0]
-    pos_y = [0]
-    pos_z = [0]
-    specie_str = [0]
-    atom_charge = [0]
-    file = open(input_lattice_path, 'r')
-    latline = file.readline()
-    line = latline.split()
-    atoms = int(line[0])
-    latline = file.readline()
-    atomno = 0
-    # read file
-    while 1:
-        latline = file.readline()
-        if not latline: break
-        line = latline.split()
-        atomno = atomno + 1
-        specie_str.append(str(line[0]))
-        pos_x.append(float(line[1]))
-        pos_y.append(float(line[2]))
-        pos_z.append(float(line[3]))
-        atom_charge.append(float(line[4]))
-    file.close()
-    #error check
-    if not (atoms==atomno):
-        print "error, did not read expected no. of lines in lattice"
-        print "atoms:  ", atoms
-        print "atomno: ", atomno
-    return specie_str,pos_x,pos_y,pos_z,atom_charge
-
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~            Begining of script                 ~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def md_run_multi_cascades(specie_to_hit,cascade_energy,cascade_time):
+    # check the inputs given (as function can be called externally)
+    
+    # Specie to hit
+    # Parse the atom id
+    atom_id = specie_to_hit
+    # if given an int, ensure it is a valid id no.
+    try:
+        atom_id = int(atom_id)
+        if( (atom_id < 1) or (atom_id > 113) ):
+            print("> Atom id must be a valid atom symbol, name or number between 1 and 113")
+            print("> Exiting ...")
+            sys.exit()
+    except ValueError:
+        # not an int, so try to lookup two char atom symbol or element name
+        atom_id = md_constants.find_atomic_num(atom_id)
+        if( (atom_id < 1) or (atom_id > 113) ):
+            print("> Atom id must be a valid atom symbol, name or number between 1 and 113")
+            print("> Exiting ...")
+            sys.exit()
+    # should now have a valid atom_id
+    # so we can pass equiv atom symbol string to the function
+    specie_to_hit = md_constants.atomic_symbol[atom_id]
+    
+    # ensure the cascade energy given is a positive number
+    try:
+        cascade_energy = float(cascade_energy)
+        if( (cascade_energy < 0) ):
+            print("> The cascade energy must be a positive number.")
+            print("> Exiting ...")
+            sys.exit()
+    except ValueError:
+        print("> The cascade energy must be a positive number.")
+        print("> Exiting ...")
+        sys.exit()
+    
+    # ensure the cascade time given is a positive number
+    try:
+        cascade_time = float(cascade_time)
+        if( (cascade_time < 0) ):
+            print("> The cascade time must be a positive number.")
+            print("> Exiting ...")
+            sys.exit()
+    except ValueError:
+        print("> The cascade time must be a positive number.")
+        print("> Exiting ...")
+        sys.exit()
+
+    
     # print the passed data
     print("running cascades")
     print("specie_to_hit:  " + str(specie_to_hit) )
@@ -163,14 +177,43 @@ def md_run_multi_cascades(specie_to_hit,cascade_energy,cascade_time):
 
 
     # read lattice header (in md_input dir)
-    atoms,box_x,box_y,box_z = read_lattice_header(input_lattice_path)
+    # extract the number of atoms and the boxsize
+    file = open(input_lattice_path, 'r')
+    line = file.readline()
+    line = line.split()
+    atoms = int(line[0])
+    line = file.readline()
+    line = line.split()
+    box_x = float(line[0])
+    box_y = float(line[1])
+    box_z = float(line[2])
     print("atoms:   " + str(atoms) )
     print("Lattice: " + str(box_x) + "  " + str(box_y) + "  " + str(box_z) + " Angstroms")
     sys.stdout.flush()
-
-
     # read atom data from lattice.dat
-    specie_str,pos_x,pos_y,pos_z,atom_charge = read_lattice_data(input_lattice_path)
+    pos_x = [0]
+    pos_y = [0]
+    pos_z = [0]
+    specie_str = [0]
+    atom_charge = [0]
+    atomno = 0
+    # read file
+    while 1:
+        line = file.readline()
+        if not line: break
+        line = line.split()
+        atomno = atomno + 1
+        specie_str.append(str(line[0]))
+        pos_x.append(float(line[1]))
+        pos_y.append(float(line[2]))
+        pos_z.append(float(line[3]))
+        atom_charge.append(float(line[4]))
+    file.close()
+    #error check
+    if not (atoms==atomno):
+        print "error, did not read expected no. of lines in lattice"
+        print "atoms:  ", atoms
+        print "atomno: ", atomno
 
     # check that atom to hit exists
     atom_exists = 0
@@ -262,8 +305,6 @@ def md_run_multi_cascades(specie_to_hit,cascade_energy,cascade_time):
         outputfile.write( str(counter) + '\tDone cascade \n')
         outputfile.flush()
         os.fsync(outputfile.fileno())
-
-
 
 
 if __name__ == '__main__':
