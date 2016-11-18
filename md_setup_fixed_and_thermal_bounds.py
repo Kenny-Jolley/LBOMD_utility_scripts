@@ -121,7 +121,7 @@ def md_setup_fixed_and_thermal_bounds(fixed_bound,thermal_bound):
 
 if __name__ == '__main__':
     
-    if (len(sys.argv) <> 3):
+    if (len(sys.argv) != 3):
         print("\n> The size of the fixed and thermal boundary must be given on the command-line.")
         print("> Exiting...")
         sys.exit()
