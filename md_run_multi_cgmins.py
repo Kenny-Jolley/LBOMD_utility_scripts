@@ -26,6 +26,7 @@ from md_setup_equilibrate import md_setup_equilibrate
 from md_setup_continue_production import md_setup_continue_production
 from md_setup_gen_random_system import md_setup_gen_random_system
 from md_setup_production import md_setup_production
+from md_setup_output_freq import md_setup_output_freq
 
 def print_usage():
     print("\n> Usage ")
@@ -215,6 +216,8 @@ while 1:
         md_setup_simtime(1200000)
         # set MD code to resume a simulation
         md_setup_continue_production()
+        # set the output frequency
+        md_setup_output_freq(100000)
         
         # run md code to quench system
         print("resuming quench no. " + str(counter) )
@@ -230,6 +233,8 @@ while 1:
         # set prodution and simtime
         md_setup_production()
         md_setup_simtime(1200000)
+        # set the output frequency
+        md_setup_output_freq(100000)
         
         # run md code to quench system
         print("running quench no. " + str(counter))
