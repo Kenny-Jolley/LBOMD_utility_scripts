@@ -98,7 +98,7 @@ def md_setup_fixed_bounds(fixed_bound):
 
 if __name__ == '__main__':
     
-    if (len(sys.argv) <> 2):
+    if (len(sys.argv) != 2):
         print("\n> The size of the fixed boundary must be given on the command-line.")
         print("> Exiting...")
         sys.exit()
