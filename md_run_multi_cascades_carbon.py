@@ -29,6 +29,7 @@ from md_setup_production import md_setup_production
 from md_setup_continue_production import md_setup_continue_production
 from md_setup_simtime import md_setup_simtime
 from md_setup_output_freq import md_setup_output_freq
+from md_setup_output_failsafe import md_setup_output_failsafe
 from md_setup_gen_carbon_input_files import md_setup_gen_carbon_input_files
 
 
@@ -81,7 +82,7 @@ def md_run_multi_cascades_carbon(cascade_energy,cascade_time):
     
     #-------------------------------
     # Hard coded options
-    output_file_freq = 100
+    output_file_freq = 10
     #-------------------------------
     
     # check the inputs given (as function can be called externally)
@@ -282,6 +283,7 @@ def md_run_multi_cascades_carbon(cascade_energy,cascade_time):
 
             # set the output frequency
             md_setup_output_freq(output_file_freq)
+            md_setup_output_failsafe(output_file_freq)
 
             print("> Begin new casacade simulation : " + str(counter) )
     
